@@ -122,7 +122,7 @@ function makeFretboard(x,y){
 	}
 	ctx.fillStyle = protoBoard.colors.fretNums;
 	ctx.font = "20pt Verdana";
-	["3", "5", "7", "10", "12"].forEach((num) => {
+	["3", "5", "7", "9", "12"].forEach((num) => {
 		ctx.fillText(
 			num,
 			b.x - 1.1 * protoBoard.stringSpace,
