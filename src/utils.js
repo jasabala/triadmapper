@@ -101,7 +101,7 @@ function makeFretboard(x,y){
 		ctx.stroke();
 	}
 	ctx.strokeStyle = protoBoard.colors.frets;
-	let boldFrets = [0,3,5,7,10,12]
+	let boldFrets = [0,3,5,7,9,12]
 
 	for (let i = 0; i <= 15; i++) {
 		ctx.beginPath();
