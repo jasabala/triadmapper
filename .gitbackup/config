@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[user]
+	email = me@here.com
+	name = my name
+[remote "heroku"]
+	url = https://git.heroku.com/triadmapper.git
+	fetch = +refs/heads/*:refs/remotes/heroku/*

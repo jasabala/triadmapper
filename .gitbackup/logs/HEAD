@@ -1,0 +1,70 @@
+0000000000000000000000000000000000000000 a1e9adaad013e2cb82e425c6de3b8e63a5712e39 my name <me@here.com> 1643059744 -0800	commit (initial): first commit
+a1e9adaad013e2cb82e425c6de3b8e63a5712e39 44b1521b55640db7ade07286cbd6e9e85b5cb3ea my name <me@here.com> 1643059981 -0800	commit: first commit
+44b1521b55640db7ade07286cbd6e9e85b5cb3ea 620bdcc8cd996adfadeac3963e3c76e60d2d108d my name <me@here.com> 1643065465 -0800	commit: new server
+620bdcc8cd996adfadeac3963e3c76e60d2d108d 2dc6332dbb24dfba74a90c334c85590f4f71d2a2 my name <me@here.com> 1643065550 -0800	commit: new server
+2dc6332dbb24dfba74a90c334c85590f4f71d2a2 d67a524c63ed7463cacd78049071c00f0a11619a my name <me@here.com> 1643395719 -0800	commit: fixed server crask on favicon
+d67a524c63ed7463cacd78049071c00f0a11619a 173f6665e00c2b3f4dfe42087c48c88721973303 my name <me@here.com> 1643411478 -0800	commit: made it prettier
+173f6665e00c2b3f4dfe42087c48c88721973303 9111f6d25457ee6a630fc49564791c3a60e2c877 my name <me@here.com> 1643411697 -0800	commit: made it prettier
+9111f6d25457ee6a630fc49564791c3a60e2c877 7d95cd842414cbcf2f0d2a18b71feac4c78d2725 my name <me@here.com> 1643958317 -0800	commit: sorted artist
+7d95cd842414cbcf2f0d2a18b71feac4c78d2725 141645468566bb3985321f2bcce0ac2b2104a76f my name <me@here.com> 1644004853 -0800	commit: color coded chords
+141645468566bb3985321f2bcce0ac2b2104a76f 3c545605f1f84ef8b77fe0913045b3424436fb57 my name <me@here.com> 1644004970 -0800	commit: color coded chords
+3c545605f1f84ef8b77fe0913045b3424436fb57 d482b80555b5374745d4a6d583e417f32df4e212 my name <me@here.com> 1644005603 -0800	commit: color coded chords
+d482b80555b5374745d4a6d583e417f32df4e212 f07e80d79f4ef57c1122f306977ddbaab9aadd29 my name <me@here.com> 1644006264 -0800	commit: color coded chords
+f07e80d79f4ef57c1122f306977ddbaab9aadd29 ce471f486d5d11e3e4f4f98381cfe5e588e63280 my name <me@here.com> 1644006560 -0800	commit: color coded chords
+ce471f486d5d11e3e4f4f98381cfe5e588e63280 f4e95f934ab68f8a1889718a41c3531b09a96ae1 my name <me@here.com> 1644008722 -0800	commit: color coded chords
+f4e95f934ab68f8a1889718a41c3531b09a96ae1 7d5ddcd6bd6597f67b9c76ff57f988cd57f2dcab my name <me@here.com> 1644020653 -0800	commit: song editing
+7d5ddcd6bd6597f67b9c76ff57f988cd57f2dcab e181a890da5280d15aadd1f866c3bade32ba9080 my name <me@here.com> 1644510088 -0800	commit: song adding fixed
+e181a890da5280d15aadd1f866c3bade32ba9080 6450f87f24d016d186230098bce7b798dd52d2ca my name <me@here.com> 1644513235 -0800	commit: looks
+6450f87f24d016d186230098bce7b798dd52d2ca 73b38c6f4fde3619005ff596a8893c9b19bbe6e4 my name <me@here.com> 1644687153 -0800	commit: quick song add
+73b38c6f4fde3619005ff596a8893c9b19bbe6e4 d2131bb161d4164b35139b53dd89f15548d8506a my name <me@here.com> 1644687293 -0800	commit: same
+d2131bb161d4164b35139b53dd89f15548d8506a a4ff1cb06b7b8b0aaaf3ca676ac5333bd39a32d7 my name <me@here.com> 1644880126 -0800	commit: menu additions
+a4ff1cb06b7b8b0aaaf3ca676ac5333bd39a32d7 799152ed9b3516ccdf0c1c6bc46aec1f3db24edd my name <me@here.com> 1644880185 -0800	commit: menu additions
+799152ed9b3516ccdf0c1c6bc46aec1f3db24edd 8b15906ac2a18c7e63cd3230f19adbe4479192ad my name <me@here.com> 1644880620 -0800	commit: menu additions
+8b15906ac2a18c7e63cd3230f19adbe4479192ad ca61e5810231a62712d268d0d36c8347f2f53858 my name <me@here.com> 1644943027 -0800	commit: lyrics
+ca61e5810231a62712d268d0d36c8347f2f53858 82287b6c10b9fcb3b330500581c93a2cf71cc6d7 my name <me@here.com> 1644945022 -0800	commit: improve lyric search
+82287b6c10b9fcb3b330500581c93a2cf71cc6d7 b4370d31b4add9a77ecf0394620500c7b7bf1c00 my name <me@here.com> 1644954298 -0800	commit: backup lyric server
+b4370d31b4add9a77ecf0394620500c7b7bf1c00 96e9e7180543f03947c18d8d1b419b85ad0255b6 my name <me@here.com> 1644962013 -0800	commit: more imporvement on lyric lookup
+96e9e7180543f03947c18d8d1b419b85ad0255b6 21615a71a150013b0b341ebcbd84a2ccead18878 my name <me@here.com> 1644962194 -0800	commit: oops
+21615a71a150013b0b341ebcbd84a2ccead18878 b730f19e9721edd49b9fd0a7ba95dbf1839b5ca2 my name <me@here.com> 1644962347 -0800	commit: probs with env variable
+b730f19e9721edd49b9fd0a7ba95dbf1839b5ca2 d9b965b500020158c5d02e805ca25e510c27b52f my name <me@here.com> 1645027868 -0800	commit: print functions
+d9b965b500020158c5d02e805ca25e510c27b52f 64179b23e952bfe70f4d51cee03cefb7aeee2942 my name <me@here.com> 1645027978 -0800	commit: repair
+64179b23e952bfe70f4d51cee03cefb7aeee2942 61cd49e5a188dbad701bfc36d1347eb314179922 my name <me@here.com> 1645028435 -0800	commit: favicon and title
+61cd49e5a188dbad701bfc36d1347eb314179922 ce4f8216cf9be297cb16e0508ae08e70cd6888e6 my name <me@here.com> 1645028741 -0800	commit: favicon
+ce4f8216cf9be297cb16e0508ae08e70cd6888e6 9210a18ab2ce6cb75526c6c87fc3a55e43fd3c67 my name <me@here.com> 1645028964 -0800	commit: fvicon i wonder
+9210a18ab2ce6cb75526c6c87fc3a55e43fd3c67 4e3792208f42602c196590240a16be6e58398f9d my name <me@here.com> 1645108403 -0800	commit: stramline lyric searcch
+4e3792208f42602c196590240a16be6e58398f9d 2267547fda72187ef9dbd3ba54b610dd26e690f4 my name <me@here.com> 1645108664 -0800	commit: favicon
+2267547fda72187ef9dbd3ba54b610dd26e690f4 67322e9d2612bf66dd3f70316e55f3364a77e153 my name <me@here.com> 1645108884 -0800	commit: favicon
+67322e9d2612bf66dd3f70316e55f3364a77e153 974153f6ec26bcfff00b2efc99877b0a581dd098 my name <me@here.com> 1645109541 -0800	commit: favicon
+974153f6ec26bcfff00b2efc99877b0a581dd098 11f224a55456638f675b4fc579207dac27d94191 my name <me@here.com> 1645109707 -0800	commit: favicon
+11f224a55456638f675b4fc579207dac27d94191 45816340c516fa9ec656ad03b75442c0a3e9077e my name <me@here.com> 1645128807 -0800	commit: favicon
+45816340c516fa9ec656ad03b75442c0a3e9077e c62d959f2378456d48f64e5204b0daa9d4a5c745 my name <me@here.com> 1645129728 -0800	commit: layout
+c62d959f2378456d48f64e5204b0daa9d4a5c745 2d582fc0a05eb8390ad0fc6a793e3ab181e8639e my name <me@here.com> 1645134027 -0800	commit: lyrics fetch
+2d582fc0a05eb8390ad0fc6a793e3ab181e8639e bbe0e6f084d0b0e256c950002f1e0c16da046518 my name <me@here.com> 1645134987 -0800	commit: humans
+bbe0e6f084d0b0e256c950002f1e0c16da046518 3d56156c55a7c5b9c2d980bfb87ade4edb8eba94 my name <me@here.com> 1645138947 -0800	commit: asthetics
+3d56156c55a7c5b9c2d980bfb87ade4edb8eba94 155e01bf6b4ea91ca72b64735a68d17e118793a4 my name <me@here.com> 1645139574 -0800	commit: added key return button
+155e01bf6b4ea91ca72b64735a68d17e118793a4 6f6034473bb4c0d3e04dc27adee4472c4814320d my name <me@here.com> 1645550284 -0800	commit: song display was hard to read
+6f6034473bb4c0d3e04dc27adee4472c4814320d c81d0b653d98404ecdac61dc4159f86df4986f43 my name <me@here.com> 1645550795 -0800	commit: lyric server
+c81d0b653d98404ecdac61dc4159f86df4986f43 3ac70f2949c10830633fccb9a327c55850d9f7fa my name <me@here.com> 1645550869 -0800	commit: lyric server
+3ac70f2949c10830633fccb9a327c55850d9f7fa ade67fa83d44b4b098cfb2ae2e6d627b956a2708 my name <me@here.com> 1645551154 -0800	commit: lyric server
+ade67fa83d44b4b098cfb2ae2e6d627b956a2708 49ddf9255ef4e64a28056f09b7503b49c8189543 my name <me@here.com> 1645552773 -0800	commit: https redirect
+49ddf9255ef4e64a28056f09b7503b49c8189543 2e6b136855045fba2c0c7d54ef5ba00b2aded362 my name <me@here.com> 1645570049 -0800	commit: lots of little things and scrolling
+2e6b136855045fba2c0c7d54ef5ba00b2aded362 42436ff33bc5a8b8a759dbe4135ad1f0c0c2e364 my name <me@here.com> 1645570224 -0800	commit: lots of little things and scrolling
+42436ff33bc5a8b8a759dbe4135ad1f0c0c2e364 47402550f4becac648a9d3811d921b6537524cba my name <me@here.com> 1645570338 -0800	commit: titlecase for title
+47402550f4becac648a9d3811d921b6537524cba 9abfb90c980cf8dce9b6228fe16f71822b3e27ed my name <me@here.com> 1645592339 -0800	commit: lots of little things and scrolling
+9abfb90c980cf8dce9b6228fe16f71822b3e27ed 0678192fbbd22c8e70ef2e59bd2a393c7fe28019 my name <me@here.com> 1645593201 -0800	commit: lots of little things and scrolling
+0678192fbbd22c8e70ef2e59bd2a393c7fe28019 37063187b2a40953fb4754fb958c4a458b48fbae my name <me@here.com> 1645595822 -0800	commit: lots of little things and scrolling
+37063187b2a40953fb4754fb958c4a458b48fbae 042fc49a2433c5a953db1b6b50f8695422077860 my name <me@here.com> 1645596050 -0800	commit: lots of little things and scrolling
+042fc49a2433c5a953db1b6b50f8695422077860 72a6d7e83656bbc9d11ac3f247ffcfd6e4515578 my name <me@here.com> 1645596311 -0800	commit: lots of little things and scrolling
+72a6d7e83656bbc9d11ac3f247ffcfd6e4515578 d56b5c6093da27b1e81790286aa896432301833b my name <me@here.com> 1645596341 -0800	commit: alright
+d56b5c6093da27b1e81790286aa896432301833b ff230ed73f7de23507b4ba56676cc9e131a3c8e2 my name <me@here.com> 1645596397 -0800	commit: lots of little things and scrolling
+ff230ed73f7de23507b4ba56676cc9e131a3c8e2 5d1ed35a069b365270af9fe8fa6c36682ee664b8 my name <me@here.com> 1645597042 -0800	commit: lots of little things and scrolling
+5d1ed35a069b365270af9fe8fa6c36682ee664b8 176bd97449b29081490e272ad4347bd56a2e5423 my name <me@here.com> 1645597890 -0800	commit: lots of little things and scrolling
+176bd97449b29081490e272ad4347bd56a2e5423 24571eaa1330b768f6f105aed0098bb587dca087 my name <me@here.com> 1645632170 -0800	commit: back button
+24571eaa1330b768f6f105aed0098bb587dca087 0debf3aeef985162a0b69d057886756ba0c30561 my name <me@here.com> 1645995210 -0800	commit: the first
+0debf3aeef985162a0b69d057886756ba0c30561 1102409dc6ddc7021949d80196e954b9ed87ede7 my name <me@here.com> 1645995463 -0800	commit: the 2st
+1102409dc6ddc7021949d80196e954b9ed87ede7 a77b72f116a649895a914aef992edafa84819a87 my name <me@here.com> 1645995870 -0800	commit: the 3st
+a77b72f116a649895a914aef992edafa84819a87 c99abe9d3e1c2f2bc1fe7c5543c3fb983083e153 my name <me@here.com> 1646001103 -0800	commit: close to done i think - heheh
+c99abe9d3e1c2f2bc1fe7c5543c3fb983083e153 679a1593b16db0d79c935af1bb15c0606929daeb my name <me@here.com> 1646063477 -0800	commit: console logging of counter
+679a1593b16db0d79c935af1bb15c0606929daeb f688346739fcc6960f27f265946c6a018f8a9ea3 my name <me@here.com> 1646063598 -0800	commit: console logging of counter
+f688346739fcc6960f27f265946c6a018f8a9ea3 5cbe9fe2de69cabe7db6244556453b2e026014c7 my name <me@here.com> 1646243932 -0800	commit: pattern correction
+5cbe9fe2de69cabe7db6244556453b2e026014c7 fa936ffb75aab7d1ffd0f6534e08e4d554c9158d my name <me@here.com> 1646246033 -0800	commit: open tuning

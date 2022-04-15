@@ -1,0 +1,681 @@
+
+
+let entries = [];
+console.clear();
+
+   
+
+function getLyrics(title, artist, repeat) {
+	let spot = document.getElementById("lyricsSpot");
+	spot.innerHTML = "";
+	let url = "https://api.lyrics.ovh/v1/" + artist + "/" + title;
+	console.log(url)
+
+	fetch(url)
+		.then((res) => {
+			if (res.ok) {
+				return res.json();
+			} else {
+					console.log("second method")
+					let spot = document.getElementById("lyricsSpot");
+					let url = 'http://localhost:3000/song/all/'+title
+					spot.innerHTML = '<object type="text/html" data="'+url+'" width = 100%></object>'
+					return {}				
+			}
+		})
+		.then((data) => {
+			if(data && data.lyrics && data.lyrics != "Not Found!"){
+				console.log("first method")
+				let lyrics = data.lyrics;
+				lyrics = lyrics.replace(/(\n\n\n|\n\n|\r\n|\n)/g, "<br>");
+				console.log(lyrics);
+				spot.innerHTML = lyrics;
+			}			
+		});
+}
+
+function shuffle(array) {
+	let currentIndex = array.length,
+		randomIndex;
+
+	// While there remain elements to shuffle...
+	while (currentIndex != 0) {
+		// Pick a remaining element...
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex--;
+
+		// And swap it with the current element.
+		[array[currentIndex], array[randomIndex]] = [
+			array[randomIndex],
+			array[currentIndex]
+		];
+	}
+	return array;
+}
+
+function transposeChord(chord, amount) {
+	var scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+	var normalizeMap = {
+		Cb: "B",
+		Db: "C#",
+		Eb: "D#",
+		Fb: "E",
+		Gb: "F#",
+		Ab: "G#",
+		Bb: "A#",
+		"E#": "F",
+		"B#": "C"
+	};
+	return chord.replace(/[CDEFGAB](b|#)?/g, function (match) {
+		var i =
+			(scale.indexOf(normalizeMap[match] ? normalizeMap[match] : match) + amount) %
+			scale.length;
+		return scale[i < 0 ? i + scale.length : i];
+	});
+}
+
+function titleCase(str) {
+	return str
+		.toLowerCase()
+		.split(" ")
+		.map(function (word) {
+			if (word) {
+				return word.replace(word[0], word[0].toUpperCase());
+			} else {
+				return "";
+			}
+		})
+		.join(" ");
+}
+
+let chromaticScale = [
+	"C",
+	"C#",
+	"D",
+	"D#",
+	"E",
+	"F",
+	"F#",
+	"G",
+	"G#",
+	"A",
+	"Bb",
+	"B",
+	"C",
+	"C#",
+	"D",
+	"Eb",
+	"E",
+	"F",
+	"F#",
+	"G",
+	"G#",
+	"A",
+	"Bb",
+	"B",
+	"C",
+	"C#",
+	"D",
+	"Eb",
+	"E",
+	"F",
+	"F#"
+];
+let upperCaseLetters = [
+	"A",
+	"B",
+	"C",
+	"D",
+	"E",
+	"F",
+	"G",
+	"H",
+	"I",
+	"J",
+	"K",
+	"L",
+	"M",
+	"N",
+	"O",
+	"P",
+	"Q",
+	"R",
+	"S",
+	"T",
+	"U",
+	"V",
+	"W",
+	"X",
+	"Y",
+	"Z"
+];
+
+let songListDiv = document.getElementById("songList");
+let songDiv = document.getElementById("song");
+let leaderSelect = document.getElementById("leaderSelect");
+let artistSelect = document.getElementById("artistSelect");
+let chordColors = {
+	A: "blue",
+	B: "red",
+	C: "#82caaf",
+	D: "darkblue",
+	E: "brown",
+	F: "#FBC02D",
+	G: "#8E24AA"
+};
+
+let currentSong = {};
+
+getDataAndStart();
+
+function getDataAndStart() {
+	let req = new XMLHttpRequest();
+	req.onreadystatechange = () => {
+		if (req.readyState == XMLHttpRequest.DONE) {
+			let data = req.responseText;
+			let parsedData = JSON.parse(data);
+			entries = parsedData["record"];
+			shuffle(entries);
+			makeControlPanel();
+			makeSongList(entries);
+			//	exportSongs(entries, "songs.txt")
+		}
+	};
+
+	req.open("GET", "https://api.jsonbin.io/v3/b/61eaff796c4a232f9d86bfe8", true);
+	req.setRequestHeader(
+		"X-Master-Key",
+		"$2b$10$NIrNpKts7a0/XTdQreBHLOo8A7a9vYXiUU9pxI55b8EqEmDhv59uK"
+	);
+	req.send();
+}
+
+function sendSongData(song) {
+	let req = new XMLHttpRequest();
+	req.onreadystatechange = () => {
+		if (req.readyState == XMLHttpRequest.DONE) {
+			console.log("song saved");
+		}
+	};
+
+	req.open("PUT", "https://api.jsonbin.io/v3/b/61eaff796c4a232f9d86bfe8", true);
+	req.setRequestHeader("Content-Type", "application/json");
+	req.setRequestHeader(
+		"X-Master-Key",
+		"$2b$10$NIrNpKts7a0/XTdQreBHLOo8A7a9vYXiUU9pxI55b8EqEmDhv59uK"
+	);
+	req.send(JSON.stringify(song));
+}
+
+function makeControlPanel() {
+	document.getElementById("editSongButton").style.display = "none";
+	let leaders = [];
+	let artists = [];
+	let leaderText = "leader (all) - " + entries.length;
+	leaderSelect.innerHTML = "<option>" + leaderText + "</option>";
+	artistSelect.innerHTML = "<option>inspired by (all)</option>";
+	for (let index = 0; index < entries.length; index++) {
+		if (leaders.indexOf(entries[index].leader) < 0) {
+			leaders.push(entries[index].leader);
+		}
+		if (artists.indexOf(entries[index].artist) < 0) {
+			artists.push(entries[index].artist);
+		}
+	}
+	leaders.sort();
+	artists.sort();
+	for (let index = 0; index < leaders.length; index++) {
+		leaderSelect.options[leaderSelect.options.length] = new Option(
+			leaders[index] + "-" + getKeyCount("leader", leaders[index], entries),
+			index
+		);
+	}
+	for (let index = 0; index < artists.length; index++) {
+		artistSelect.options[artistSelect.options.length] = new Option(
+			artists[index] + "-" + getKeyCount("artist", artists[index], entries),
+			index
+		);
+	}
+	leaderSelect.addEventListener("change", makeSongList, false);
+	artistSelect.addEventListener("change", makeSongList, false);
+	document
+		.getElementById("songSearch")
+		.addEventListener("change", makeSongList, false);
+}
+
+function makeSongList() {
+	hideAddSongPage();
+	toggleSongList();
+	songDiv.style.display = "none";
+	songListDiv.innerHTML = "";
+	let songs = entries;
+	if (leaderSelect.selectedIndex != 0) {
+		songs = entries.filter(
+			(entry) =>
+				entry.leader ===
+				leaderSelect.options[leaderSelect.selectedIndex].text.split("-")[0]
+		);
+	}
+	if (artistSelect.selectedIndex != 0) {
+		songs = songs.filter(
+			(entry) =>
+				entry.artist ===
+				artistSelect.options[artistSelect.selectedIndex].text.split("-")[0]
+		);
+	}
+	let songSearch = document.getElementById("songSearch");
+	let searchText = songSearch.value.toLowerCase();
+	if (searchText != "") {
+		songs = songs.filter(
+			(entry) =>
+				entry.title.indexOf(searchText) >= 0 ||
+				entry.artist.indexOf(searchText) >= 0
+		);
+	}
+
+	songs.forEach((song) => {
+		let t = document.createElement("button");
+		t.classList.add("songTitle");
+		t.classList.add("button-33");
+		t.onclick = function () {
+			currentSong = song;
+			showSong(song);
+			return false;
+		};
+		let title = document.createTextNode(titleCase(song.title));
+		t.appendChild(title);
+		songListDiv.appendChild(t);
+	});
+}
+
+function makeChordRow(chords, destination) {
+	let sections = Object.keys(chords);
+	sections.forEach((section) => {
+		if (chords[section][0]) {
+			let part = document.createElement("div");
+			part.classList.add("section");
+			part.appendChild(document.createTextNode(section));
+			destination.appendChild(part);
+			chords[section].forEach((lines) => {
+				let line = document.createElement("div");
+				line.classList.add("songRow");
+				part.appendChild(line);
+				lines.forEach((chord, index) => {
+					let c = document.createElement("div");
+					c.classList.add("chord");
+					let notes = chord.split(" ");
+					notes.forEach((note) => {
+						let n = document.createElement("span");
+						n.innerHTML = note;
+						n.style.color = chordColors[note[0]];
+						c.appendChild(n);
+					});
+					c.style.color = chordColors[chord[0]];
+
+					line.appendChild(c);
+				});
+			});
+		}
+	});
+}
+
+function showSong(song) {
+	console.log("show")
+	getLyrics(song.title,song.artist )
+	let chordsSpot = document.getElementById("songChords");
+	chordsSpot.innerHTML = "";
+	let titleSpot = document.createElement("div");
+	titleSpot.classList.add("songTitle");
+	let t = song.leader + " | " + titleCase(song.title) + " | " + song.artist;
+	titleSpot.appendChild(document.createTextNode(t));
+	chordsSpot.appendChild(titleSpot);
+	makeChordRow(song.chords, chordsSpot);
+	songDiv.style.display = "block";
+	songListDiv.style.display = "none";
+	document.getElementById("addSongButton").style.display = "none";
+	document.getElementById("editSongButton").style.display = "block";
+}
+
+function toggleSongList() {
+	songListDiv.style.display = "block";
+	songDiv.style.display = "none";
+	document.getElementById("addSongButton").style.display = "block";
+	document.getElementById("editSongButton").style.display = "none";
+	hideAddSongPage();
+}
+
+console.log(".");
+
+function removeChords(text) {
+	let divname = text + "InputArea";
+	let d = document.getElementById(divname);
+	d.removeChild(d.lastChild);
+}
+
+function inputChords(text) {
+	let divname = text + "InputArea";
+	let d = document.getElementById(divname);
+	let line = document.createElement("div");
+	let b = document.createElement("button");
+	b.innerHTML = " ++ ";
+	b.onclick = function () {
+		console.log("add");
+		let i = document.createElement("input");
+		line.appendChild(i);
+		return false;
+	};
+	let b2 = document.createElement("button");
+	b2.innerHTML = " -- ";
+	b2.onclick = function () {
+		if (line.children.length >= 3) {
+			line.removeChild(line.lastChild);
+		}
+	};
+	line.appendChild(b);
+	line.appendChild(b2);
+	let i = document.createElement("input");
+	line.appendChild(i);
+	d.appendChild(line);
+}
+
+function saveSong() {
+	let data = document.getElementById("addSongPage");
+	let theSong = {};
+	theSong.id = document.getElementById("idArea").innerHTML;
+	theSong.leader = data.getElementsByTagName("input")[0].value.toLowerCase();
+	theSong.title = data.getElementsByTagName("input")[1].value.toLowerCase();
+	theSong.artist = data.getElementsByTagName("input")[2].value.toLowerCase();
+	theSong.chords = {};
+
+	function getChords(section) {
+		let rows = section.getElementsByTagName("div");
+		let c = [];
+		for (let o = 0; o < rows.length; o++) {
+			let chords = rows[o].getElementsByTagName("input");
+			let r = [];
+			for (let i = 0; i < chords.length; i++) {
+				r.push(chords[i].value);
+			}
+			c.push(r);
+		}
+		return c;
+	}
+	let intro = document.getElementById("introInputArea");
+	let verse = document.getElementById("verseInputArea");
+	let chorus = document.getElementById("chorusInputArea");
+	let prechorus = document.getElementById("prechorusInputArea");
+	let bridge = document.getElementById("bridgeInputArea");
+
+	theSong.chords.intro = getChords(intro);
+	theSong.chords.verse = getChords(verse);
+	theSong.chords.prechorus = getChords(prechorus);
+	theSong.chords.chorus = getChords(chorus);
+	theSong.chords.bridge = getChords(bridge);
+
+	if (currentSong.id && theSong.id === currentSong.id.toString()) {
+		console.log("replaced", theSong.title);
+		let index = entries.indexOf(
+			entries.filter((e) => e.id === currentSong.id)[0]
+		);
+		entries[index] = theSong;
+	} else {
+		console.log("added", theSong.title);
+		theSong.id = entries.length;
+		entries.push(theSong);
+	}
+
+	makeControlPanel();
+	makeSongList();
+	toggleSongList();
+	sendSongData(entries);
+}
+
+function putSongInForm() {
+	let idArea = document.getElementById("idArea");
+	idArea.innerHTML = currentSong.id;
+	let titleArea = document.getElementById("titleInput");
+	titleArea.value = currentSong.title;
+	let leaderArea = document.getElementById("leaderInput");
+	leaderArea.value = currentSong.leader;
+	let artistArea = document.getElementById("artistInput");
+	artistArea.value = currentSong.artist;
+
+	let theKeys = Object.keys(currentSong.chords);
+
+	addChordsToForm("intro", "introInputArea");
+	addChordsToForm("verse", "verseInputArea");
+	addChordsToForm("prechorus", "prechorusInputArea");
+	addChordsToForm("chorus", "chorusInputArea");
+	addChordsToForm("bridge", "bridgeInputArea");
+
+	function addChordsToForm(part, area) {
+		let kids = document.getElementById(area).children;
+		for (let index = 0; index < kids.length; index++) {}
+		document.getElementById(area).innerHTML = "";
+		currentSong.chords[part].forEach((l, index) => {
+			let line = document.createElement("div");
+			let b = document.createElement("button");
+			b.innerHTML = " ++ ";
+			b.onclick = function () {
+				let i = document.createElement("input");
+				line.appendChild(i);
+				return false;
+			};
+			let b2 = document.createElement("button");
+			b2.innerHTML = " -- ";
+			b2.onclick = function () {
+				if (line.children.length >= 3) {
+					line.removeChild(line.lastChild);
+				}
+			};
+			line.appendChild(b);
+			line.appendChild(b2);
+			l.forEach((c) => {
+				let input = document.createElement("input");
+				input.setAttribute("type", "text");
+				input.value = c;
+				line.appendChild(input);
+			});
+			document.getElementById(area).appendChild(line);
+		});
+	}
+
+	let page = document.getElementById("addSongPage");
+	page.style.display = "block";
+	songListDiv.style.display = "none";
+	songDiv.style.display = "none";
+}
+
+function showQuickAddPage() {
+	let page = document.getElementById("quickAddPage");
+	page.style.display = "block";
+	songListDiv.style.display = "none";
+	songDiv.style.display = "none";
+	hideAddSongPage();
+	document.getElementById("addSongButton").style.display = "none";
+}
+
+function showAddSongPage() {
+	let spots = document.getElementsByClassName("addSongPage");
+	for (let i = 0; i < spots.length; i++) {
+		spots[i].innerHTML = "";
+	}
+	document.getElementById("idArea").innerHTML = "";
+	document.getElementById("titleInput").value = "";
+	let page = document.getElementById("addSongPage");
+	page.style.display = "block";
+	songListDiv.style.display = "none";
+	songDiv.style.display = "none";
+	document.getElementById("addSongButton").style.display = "none";
+}
+function hideAddSongPage() {
+	let page = document.getElementById("addSongPage");
+	page.style.display = "none";
+	document.getElementById("addSongButton").style.display = "block";
+}
+
+function getSection(textArea) {
+	var lines = textArea.value.split("\n");
+	let songPart = [];
+	for (var o = 0; o < lines.length; o++) {
+		let songPartRow = [];
+		let row = lines[o].split(" ");
+		for (var i = 0; i < row.length; i++) {
+			let p = row[i];
+			if (p.indexOf(",") >= 0) {
+				p = p.split(",").join(" ");
+			}
+			songPartRow.push(p);
+		}
+		console.log(songPartRow[songPartRow.length - 1]);
+		while (songPartRow[songPartRow.length - 1] === "") {
+			console.log(".....");
+			songPartRow.pop();
+		}
+		if (songPartRow[0]) {
+			songPart.push(songPartRow);
+		}
+	}
+	textArea.value = "";
+	return songPart;
+}
+
+function getSong() {
+	let song = {};
+	song.id = entries.length;
+	song.leader = document.getElementById("QleaderText").value;
+	song.title = document.getElementById("QtitleText").value;
+	song.artist = document.getElementById("QartistText").value;
+	song.chords = {};
+	song.chords.intro = getSection(document.getElementById("QintroText"));
+	song.chords.verse = getSection(document.getElementById("QverseText"));
+	song.chords.chorus = getSection(document.getElementById("QchorusText"));
+	song.chords.bridge = getSection(document.getElementById("QbridgeText"));
+	song.chords.prechorus = getSection(document.getElementById("QprechorusText"));
+	let span = document.createElement("div");
+	console.log(JSON.stringify(song));
+	entries.push(song);
+	document.getElementById("quickAddPage").style.display = "none";
+	makeControlPanel();
+	makeSongList();
+	toggleSongList();
+	sendSongData(entries);
+}
+
+function transpose(dir) {
+	let chords = songDiv.getElementsByTagName("span");
+	for (let o = 0; o < chords.length; o++) {
+		let newChords = [];
+		if (
+			chords[o].innerHTML[0] &&
+			upperCaseLetters.indexOf(chords[o].innerHTML[0]) >= 0
+		) {
+			if (
+				chords[o].innerHTML[1] &&
+				(chords[o].innerHTML[1] === "b" || chords[o].innerHTML[1] === "#")
+			) {
+				chords[o].innerHTML =
+					transposeChord(chords[o].innerHTML[0] + chords[o].innerHTML[1], dir) +
+					chords[o].innerHTML.substr(2, chords[o].innerHTML.length);
+			} else {
+				chords[o].innerHTML =
+					transposeChord(chords[o].innerHTML[0], dir) +
+					chords[o].innerHTML.substr(1, chords[o].innerHTML.length);
+			}
+		}
+	}
+}
+
+function songsNamed(tit, list) {
+	if (!list) {
+		list = entries;
+	}
+	return list.filter((e) => e.title.indexOf(tit) >= 0);
+}
+function songsBy(person, list) {
+	if (!list) {
+		list = entries;
+	}
+	return list.filter(
+		(e) => e.leader.indexOf(person) >= 0 || e.artist.indexOf(person) >= 0
+	);
+}
+
+function getKeyCount(key, target, songList) {
+	let l = songList.filter((e) => e[key] === target);
+	return l.length;
+}
+
+function newKeyOrder(arrayObj) {
+	function orderKey(obj, keyOrder) {
+		keyOrder.forEach((k) => {
+			const v = obj[k];
+			delete obj[k];
+			obj[k] = v;
+		});
+	}
+	for (i = 0; i < arrayObj.length; i++) {
+		let objectOrder = ["intro", "verse", "prechorus", "chorus", "bridge"];
+		orderKey(arrayObj[i].chords, objectOrder);
+	}
+}
+
+function getNamesAndIds(list) {
+	let ids = list.map((l) => l.id);
+	console.log(
+		ids.sort(function (a, b) {
+			return a - b;
+		})
+	);
+}
+
+function changeStringsToNums(list) {
+	list.forEach((l) => {
+		l.id = parseInt(l.id);
+	});
+}
+
+function sortByKey(key, list) {
+	list.sort(function (a, b) {
+		return a[key] > b[key];
+	});
+}
+
+function exportSongs(songs, filename) {
+	var saveData = (function (data, filename) {
+		var a = document.createElement("a");
+		document.body.appendChild(a);
+		a.style = "display: none";
+		return function (data, fileName) {
+			// var json = JSON.stringify(data),
+			(blob = new Blob([data], { type: "octet/stream" })),
+				(url = window.URL.createObjectURL(blob));
+			a.href = url;
+			a.download = fileName;
+			a.click();
+			window.URL.revokeObjectURL(url);
+		};
+	})();
+	sortByKey("id", songs);
+	let data = "";
+	songs.forEach((song) => {
+		data += song.id + "\t" + titleCase(song.title) + " (" + song.leader + ")\n";
+		data += "--------------------------------\n";
+		let sectionKeys = Object.keys(song.chords);
+		sectionKeys.forEach((section) => {
+			if (song.chords[section].length > 0) {
+				data += section + "\n";
+				let songRows = song.chords[section];
+				songRows.forEach((row) => {
+					row.forEach((measure) => {
+						data += measure + "\t";
+					});
+					data += "\n";
+				});
+				data += "\n";
+			}
+		});
+		data += "\n\n\n";
+	});
+	saveData(data, filename);
+}
