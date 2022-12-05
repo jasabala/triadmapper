@@ -11,8 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2",
+    "debug": "^4.3.4",
+    "express": "^4.18.2",
     "express-https-redirect": "^1.0.0",
+    "iconv-lite": "^0.6.3",
+    "ipaddr": "^0.1.0",
+    "ipaddr.js": "^2.0.1",
     "live-server": "^1.1.0"
   }
 }
