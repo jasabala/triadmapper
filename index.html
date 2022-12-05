@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+		<title>Triad Mapper</title>
+		<link rel="stylesheet" href="style.css">
+		<link rel="icon" type="image/x-icon" href="/resources/favicon.ico">		
+	</head>
+	<body>
+
+   <div>
+	<div>
+		<select id="tuning" onchange="updateScaleandTriads()">
+			<option value=0>Standard</option>
+			<option value=1>Open</option>
+			<option value=2>Cello</option>
+		</select>
+		<select id="keyChooser" onchange="updateScaleandTriads()">
+		</select>	
+		<select id="majMinChooser" onchange="updateScaleandTriads()">
+			<option value=0>Major</option>
+			<option value=1>Minor</option>
+		</select>
+		<select id="stringSetChooser" onchange="updateScaleandTriads()">
+			<option value=1>first</option>
+			<option value=2>second</option>
+			<option value=3>third</option>
+			<option value=4>fourth</option>
+		</select>
+		<select id="partsChooser" onchange="updateScaleandTriads()">
+			<option value="0">diatonic</option>
+			<option value="1">arpeggio</option>
+			<option value="2">major 7th arpeggio</option>
+			<option value="3">dominant 7th arpeggio</option>
+			<option value="4">pentatonic</option>
+		</select>
+		<button onclick="cloneCanvas()">Download</button>
+	</div>
+
+	</div>
+	<div id="container" width = 2000 height = 1000>
+		<canvas id="backcan" width = 2000 height = 1000></canvas>
+		<canvas id="cancan" width = 2000 height = 1000></canvas>
+		<canvas id="chordcan" width = 2000 height = 1000></canvas>
+	</div>
+</html>
+
+<script src="appData.js"></script>
+<script src="utils.js"></script>
+<script src="script.js"></script>

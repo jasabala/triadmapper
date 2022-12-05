@@ -11,7 +11,7 @@ const server = require('http').Server(app);
 const port = process.env.PORT || 3000;
 
 let folder = __dirname + '/src';
-app.use('/', httpsRedirect(true));
+app.use('/', httpsRedirect(false));
 
 app.get('/', function (req, res) {
   res.sendFile(folder+'/index.html');
